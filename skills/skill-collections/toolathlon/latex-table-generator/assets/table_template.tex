@@ -1,0 +1,29 @@
+% LaTeX Table Template (booktabs style)
+% Save this as 'format.tex' or similar for the skill to reference.
+\documentclass{article}
+\usepackage{booktabs} % Required for professional-looking rules
+
+\begin{document}
+
+% This is the template structure to replicate.
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        Model & Class & \#Param & FID-50K & Inception Score \\
+        \midrule
+        A & GAN & 300M & 40.20 & 150.00 \\
+        B & Diffusion & 2B & 20.20 & 190.00 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Example table comparing model performance.}
+    \label{tab:example}
+\end{table}
+
+% Instructions:
+% 1. Replace the column headers if needed.
+% 2. Replace the sample data rows with extracted data.
+% 3. Maintain the same number of columns (5 in this example).
+% 4. Ensure rows are sorted according to the user's request.
+
+\end{document}

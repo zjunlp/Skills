@@ -1,0 +1,53 @@
+{
+  "route_plan_template": {
+    "description": "Standard template for outputting a calculated route plan.",
+    "template": {
+      "road_plan": [
+        {
+          "from": "Location A name and brief identifier",
+          "to": "Location B name and brief identifier",
+          "distance": "Formatted distance with units (e.g., '162 m (0.1 mi)')",
+          "estimated_time": "Formatted duration (e.g., '2 mins')",
+          "directions": "Concise, human-readable turn-by-turn instructions from the directions API."
+        }
+      ],
+      "total_distance": "Formatted total distance with units",
+      "total_time": "Formatted total duration"
+    },
+    "example": {
+      "road_plan": [
+        {
+          "from": "UPenn Bookstore (Starting Point)",
+          "to": "ENIAC (Moore Building, Penn School of Engineering)",
+          "distance": "162 m (0.1 mi)",
+          "estimated_time": "2 mins",
+          "directions": "Head east on Smith Walk toward S 33rd St (take the stairs). Turn left onto S 33rd St. Destination will be on the left."
+        }
+      ],
+      "total_distance": "1.117 km (0.7 mi)",
+      "total_time": "16 mins"
+    }
+  },
+  "distance_matrix_template": {
+    "description": "Template for presenting the raw distance/time matrix data.",
+    "template": {
+      "points": [
+        {"index": 0, "name": "Point A", "address": "Full address", "coordinates": {"lat": 00.000000, "lng": -00.000000}}
+      ],
+      "distance_matrix": [
+        [0, 100, 200],
+        [100, 0, 150],
+        [200, 150, 0]
+      ],
+      "time_matrix": [
+        [0, 60, 120],
+        [60, 0, 90],
+        [120, 90, 0]
+      ],
+      "units": {
+        "distance": "meters",
+        "time": "seconds"
+      }
+    }
+  }
+}

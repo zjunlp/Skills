@@ -1,0 +1,10 @@
+[
+    {
+        "product_info": {
+            "canonical_url": "https://www.amazon.com/SPTA-Cleaning-Trumpet-Pressure-Quickly/dp/B0C5MLSXQH/ref=sr_1_6?dib=eyJ2IjoiMSJ9.4nLB6v7ZvROYYz1bmr1woCfuvr30vMBaW3w8Ncbq1Kn0hIsXUtqSXRcxF15Q6dvo23y6wQiMpg4RXVNrLncWcnQ8b5lPhnbbhTLpL6xu7gz4KPtdr9bRnydY8xTUvwMS2RQ19WComzr1eT0ZU7Q_qGA2uiAXy-iG3Dw9DC4K2FgSfgFrv9WCLVtxOCgKX60f1LGrqIk7fUcj23ZOXIlX07750Lg56Ilukx_7x0MDFQk-HaDFjtEcHKxbCCicMK87vPjaSDe7onz4kIIFkB68h83xkXHx690U1M1mVd2-lvc.N454vG2z1OBhIdonujHdm4lNa5PPrBmVng2RmYm_b20&dib_tag=se&keywords=vortex+dryer&qid=1760506371&sr=8-6",
+            "title": "SPTA Car Cleaning Gun, Car Blow Gun Trumpet Head High Pressure Dryer Blow Gun, Car Cleaning Air Gun Kit, Vortex Air Cleaning Tool for Quickly Blasts Dirt and Dust from Surface",
+            "price": "38.30",
+            "store_name": "SPTA"
+        }
+    }
+]

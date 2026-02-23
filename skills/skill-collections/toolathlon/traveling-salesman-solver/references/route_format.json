@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Route Plan Format",
+  "description": "Standard format for optimized route plans",
+  "type": "object",
+  "properties": {
+    "road_plan": {
+      "type": "array",
+      "description": "Ordered list of route legs",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Starting location name"
+          },
+          "to": {
+            "type": "string",
+            "description": "Destination location name"
+          },
+          "distance": {
+            "type": "string",
+            "description": "Human-readable distance (e.g., '162 m (0.1 mi)')"
+          },
+          "estimated_time": {
+            "type": "string",
+            "description": "Human-readable time estimate (e.g., '2 mins')"
+          },
+          "directions": {
+            "type": "string",
+            "description": "Turn-by-turn walking/driving instructions"
+          },
+          "coordinates": {
+            "type": "object",
+            "description": "Optional: Precise coordinates for mapping",
+            "properties": {
+              "from_lat": { "type": "number" },
+              "from_lng": { "type": "number" },
+              "to_lat": { "type": "number" },
+              "to_lng": { "type": "number" }
+            },
+            "optional": true
+          }
+        },
+        "required": ["from", "to", "distance", "estimated_time", "directions"]
+      }
+    },
+    "total_distance": {
+      "type": "string",
+      "description": "Total route distance in human-readable format"
+    },
+    "total_time": {
+      "type": "string",
+      "description": "Total route time in human-readable format"
+    },
+    "optimal_order": {
+      "type": "array",
+      "description": "Optional: List of location names in optimal visiting order",
+      "items": { "type": "string" },
+      "optional": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional: Calculation metadata",
+      "properties": {
+        "algorithm_used": { "type": "string" },
+        "locations_count": { "type": "integer" },
+        "calculation_timestamp": { "type": "string", "format": "date-time" }
+      },
+      "optional": true
+    }
+  },
+  "required": ["road_plan", "total_distance", "total_time"]
+}

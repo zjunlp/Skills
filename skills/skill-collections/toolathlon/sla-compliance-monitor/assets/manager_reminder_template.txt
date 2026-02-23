@@ -1,0 +1,10 @@
+Subject: [Overdue Alert] Tickets Exceeding First Reply SLA
+
+Dear Manager,
+
+The following tickets have exceeded the SLA first reply time. Please prioritize and coordinate processing:
+
+{TICKET_LIST}
+
+Best,
+MCP Inc., Customer Support Team

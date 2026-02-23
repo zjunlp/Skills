@@ -1,0 +1,38 @@
+{
+  "glass": {
+    "conductivity": "nonconductive",
+    "certainty": "high",
+    "examples": ["jar", "bottle", "window", "cup"],
+    "notes": "Electrical insulator even when containing conductive substances"
+  },
+  "metal": {
+    "conductivity": "conductive",
+    "certainty": "high",
+    "examples": ["wire", "pot", "cup", "tool"],
+    "notes": "Good conductor of electricity unless specifically coated/insulated"
+  },
+  "ceramic": {
+    "conductivity": "nonconductive",
+    "certainty": "high",
+    "examples": ["cup", "plate", "tile", "insulator"],
+    "notes": "Common electrical insulator material"
+  },
+  "wood": {
+    "conductivity": "nonconductive",
+    "certainty": "medium",
+    "examples": ["cup", "chair", "table", "bowl"],
+    "notes": "Nonconductive when dry; conductive when wet"
+  },
+  "plastic": {
+    "conductivity": "nonconductive",
+    "certainty": "high",
+    "examples": ["container", "bag", "tool", "utensil"],
+    "notes": "Excellent electrical insulator"
+  },
+  "graphite": {
+    "conductivity": "conductive",
+    "certainty": "medium",
+    "examples": ["pencil", "electrode"],
+    "notes": "Moderate conductor used in electronics"
+  }
+}

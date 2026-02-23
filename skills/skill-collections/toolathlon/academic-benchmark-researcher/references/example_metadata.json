@@ -1,0 +1,42 @@
+[
+  {
+    "dataset": "BBH",
+    "tasks": 23,
+    "trainable": false,
+    "adjustable_difficulty": false,
+    "note": "BIG-Bench Hard. 23 challenging tasks from BIG-Bench. Evaluation-only benchmark.",
+    "source": "arXiv:2210.09261"
+  },
+  {
+    "dataset": "Zebra Logic",
+    "tasks": 1,
+    "trainable": false,
+    "adjustable_difficulty": true,
+    "note": "Logic grid puzzle benchmark. Features controllable complexity levels.",
+    "source": "arXiv:2502.01100"
+  },
+  {
+    "dataset": "KOR-Bench",
+    "tasks": 5,
+    "trainable": false,
+    "adjustable_difficulty": false,
+    "note": "Knowledge-Orthogonal Reasoning Benchmark. 5 task categories: Operation, Logic, Cipher, Puzzle, Counterfactual.",
+    "source": "arXiv:2410.06526"
+  },
+  {
+    "dataset": "K&K",
+    "tasks": 1,
+    "trainable": true,
+    "adjustable_difficulty": true,
+    "note": "Knights and Knaves logical reasoning benchmark. Includes training data and puzzles with varying numbers of people (2-8).",
+    "source": "arXiv:2410.23123"
+  },
+  {
+    "dataset": "BBEH",
+    "tasks": 23,
+    "trainable": false,
+    "adjustable_difficulty": false,
+    "note": "BIG-Bench Extra Hard. Replaces each BBH task with a more difficult version.",
+    "source": "arXiv:2502.19187"
+  }
+]

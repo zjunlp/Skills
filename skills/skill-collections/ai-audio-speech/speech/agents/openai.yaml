@@ -1,0 +1,9 @@
+interface:
+  display_name: "Speech Generation Skill"
+  short_description: "Generate narrated audio from text"
+  icon_small: "./assets/speech-small.svg"
+  icon_large: "./assets/speech.png"
+
+ownership:
+  name: "Codex Team"
+  url: "https://openai.com/codex/"
