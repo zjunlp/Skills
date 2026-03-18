@@ -1,6 +1,6 @@
 ---
 name: scienceworld-environment-isolation
-description: Closes doors or openings to create a contained environment for controlled processes. Trigger this when you need to isolate a space (like a greenhouse) to optimize conditions for pollination or other environmental-sensitive tasks. This modifies room connectivity to create optimal conditions for specific processes.
+description: Use when you need to isolate a space (like a greenhouse) by closing doors or openings to create a contained environment. Trigger before starting pollination, temperature-sensitive experiments, or other environmental-sensitive tasks that require controlled conditions. Modifies room connectivity to optimize conditions for specific processes.
 ---
 # Instructions
 
@@ -26,3 +26,15 @@ Trigger this skill when you need to:
 *   This skill modifies the **connectivity** of a space, not its internal state (like temperature controls).
 *   The primary observed benefit in the trajectory was enhancing bee-mediated pollination by preventing bee escape.
 *   Reversal (re-opening doors) is not part of this skill's core function but can be done using standard `open` commands if needed later.
+
+## Example
+
+**Scenario:** You need to cross-pollinate two plants in the greenhouse using bees.
+
+1. You have placed both plants and a bee jar in the `greenhouse`.
+2. Run `look around` — you see: "door to outside (open)", "door to hallway (open)".
+3. Run `close door to outside` — output: "You close the door to outside."
+4. Run `close door to hallway` — output: "You close the door to hallway."
+5. Run `look around` — confirm both doors now show as closed. The greenhouse is fully isolated.
+6. Release the bee by running `open bee jar`. The bee cannot escape and will pollinate both plants.
+7. Run `wait` several times to allow pollination to complete.

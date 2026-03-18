@@ -1,37 +1,43 @@
 ---
 name: alfworld-tool-locator
-description: This skill searches for a specified tool or device (e.g., a desklamp) within the environment by checking relevant surfaces. It should be triggered when the agent needs a tool to interact with another object as part of the task. The skill takes a tool name as implicit input and outputs navigation actions to likely storage spots (e.g., sidetables, shelves) until the tool is found.
+description: Searches for a specified tool or device (e.g., a desklamp, knife, or sponge) within the ALFWorld environment by checking relevant surfaces. Use when you need a tool to interact with another object as part of a task but the tool is not in your inventory or immediate vicinity. Takes a tool name as implicit input and navigates to likely storage spots (sidetables, shelves, countertops) until the tool is found.
 ---
-# Skill: Tool Locator
+# Instructions
 
-## Purpose
-Search for a specified tool or device in an ALFWorld household environment by systematically checking relevant receptacles.
+Locate a specified tool or device by systematically checking receptacles where it is likely stored.
 
-## When to Use
-Trigger this skill when:
-1. You have identified a need for a specific tool (e.g., "desklamp", "knife", "sponge") to complete a task.
-2. The tool is not currently in your inventory or immediate vicinity.
-3. You need to locate the tool before proceeding with the main task.
+## Workflow
+1. **Prioritize search locations** based on tool type:
+   - Small tools/electronics (desklamp, remotecontrol): `sidetable`, `desk`, `drawer`, `shelf`
+   - Kitchen tools (knife, spatula): `countertop`, `cabinet`, `drawer`
+   - Cleaning tools (sponge, spraybottle): `shelf`, `cabinet`, `countertop`
+   - Default: check all visible receptacles in order
+2. **Navigate** to each prioritized receptacle: `go to {receptacle}`
+3. **Inspect** the observation for the target tool name
+4. **If found:** Stop searching. Proceed to use the tool for the main task
+5. **If not found:** Continue to the next receptacle in the priority list
+6. **If exhausted:** Expand search to remaining receptacles not yet checked
 
-## Input (Implicit)
-- **Tool Name**: The name of the tool/device to locate (e.g., "desklamp", "book", "remotecontrol").
+## Action Format
+- `go to {receptacle}` -- navigate to check a location
+- `take {tool} from {receptacle}` -- pick up the tool once found (if needed)
+- `use {tool}` / `toggle {tool}` -- operate the tool in place (e.g., desklamp)
 
-## Core Logic
-1. **Identify Search Targets**: Based on the tool type, prioritize likely storage locations:
-   - For small tools/electronics: `sidetable`, `drawer`, `shelf`
-   - For kitchen tools: `countertop`, `cabinet`, `fridge`
-   - For cleaning tools: `shelf`, `cabinet`, `garbagecan`
-   - Default: Check all visible receptacles in order
+## Error Recovery
+- If "Nothing happened": verify the receptacle name matches the environment scan
+- If tool not found after all likely spots: expand search to every receptacle from the initial environment scan
 
-2. **Systematic Search Pattern**:
-   - Navigate to each prioritized receptacle
-   - Observe what's on/in the receptacle
-   - If tool is found, stop searching and proceed to use it
-   - If not found, continue to next receptacle
+## Example
 
-3. **Error Handling**:
-   - If "Nothing happened" is observed, try alternative actions
-   - If tool not found after checking all likely spots, expand search to all receptacles
+**Scenario:** You need to find a desklamp to examine an object.
 
-## Output Format
-Follow the ALFWorld action format:
+```
+Thought: I need to find a desklamp. Desklamps are usually on sidetables or desks.
+Action: go to sidetable 1
+Observation: On the sidetable 1, you see a keychain 1.
+Thought: No desklamp here. Let me check the next sidetable.
+Action: go to sidetable 2
+Observation: On the sidetable 2, you see a desklamp 1.
+```
+
+**Result:** Found `desklamp 1` on `sidetable 2`. Proceed to use it for the task.

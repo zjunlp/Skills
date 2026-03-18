@@ -1,32 +1,34 @@
 ---
 name: scienceworld-object-placer
-description: Moves a specified object from the environment or inventory into a target container based on a classification decision. It should be triggered when a task requires sorting or storing an object in a specific location after an assessment.
+description: Moves a specified object from the environment or inventory into a target container based on a classification decision. Use this skill when a task requires sorting or storing an object in a specific location after an assessment (e.g., placing a conductive object in the blue box or a non-conductive object in the orange box).
 ---
-# Instructions
+# Skill: Object Placer
 
-This skill orchestrates the final step of a conditional workflow: moving an object to a designated container after its properties have been assessed.
+## Purpose
+Move an object into the correct container based on a prior classification or assessment result. This is the final step in conditional sorting workflows.
 
-## When to Use
-Use this skill when the primary task involves:
-1.  **Classifying an object** (e.g., testing for conductivity, checking material type, verifying a state).
-2.  **Conditionally placing the object** based on the classification result (e.g., "if property X, place in Container A; else, place in Container B").
+## Core Workflow
+1. **Confirm Assessment Result:** Know which container corresponds to which classification (e.g., "blue box" = conductive, "orange box" = non-conductive).
+2. **Acquire Object (if needed):** `pick up OBJ` if the target is not already in inventory.
+3. **Execute Placement:** `move OBJ to OBJ` — place the object in the correct container.
+4. **Verify Placement:** `look at <CONTAINER>` to confirm the object is now inside.
 
-## Core Action
-The skill's primary action is `move OBJ to OBJ`. Ensure the target object is identified and the correct destination container is selected based on the prior assessment.
+## Key Actions
+| Action | Purpose |
+|--------|---------|
+| `pick up OBJ` | Acquire object if not in inventory |
+| `move OBJ to OBJ` | Place object into destination container |
+| `look at OBJ` | Verify placement succeeded |
 
-## Prerequisites
-Before executing this skill, the following must be true:
-*   The target object has been located and is accessible (in the environment or inventory).
-*   The classification test or assessment has been completed.
-*   The result of the assessment is known and the corresponding destination container has been identified.
+## Example
+**Task:** "Determine if metal pot is electrically conductive. If conductive, place in the blue box. If nonconductive, place in the orange box."
 
-## Execution Flow
-1.  **Confirm Context:** Verify the assessment result and the identity of the destination container (e.g., "blue box" for conductive, "orange box" for non-conductive).
-2.  **Acquire Object:** If the target object is not already in your inventory, use `pick up OBJ` to acquire it.
-3.  **Execute Placement:** Use the `move OBJ to OBJ` action to transfer the object to the correct container.
-4.  **Verify:** Optionally, look at the container to confirm the object was placed inside.
+1. Assessment complete: circuit test confirmed metal pot is conductive.
+2. `pick up metal pot` (if not already held)
+3. `move metal pot to blue box`
+4. `look at blue box` — confirms: "In the blue box is: a metal pot"
 
-## Example from Trajectory
-*   **Task:** "Determine if metal pot is electrically conductive. If conductive, place it in the blue box. If nonconductive, place it in the orange box."
-*   **Assessment:** A circuit test confirmed the metal pot was conductive.
-*   **Skill Execution:** `move metal pot to blue box`
+## Important Notes
+* The classification or assessment must be completed before invoking this skill.
+* Always verify placement with `look at` — do not assume success.
+* Container names vary per task (blue box, orange box, etc.) — match them to the task instructions.

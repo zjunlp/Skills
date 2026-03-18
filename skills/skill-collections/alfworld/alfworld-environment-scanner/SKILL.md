@@ -1,6 +1,6 @@
 ---
 name: alfworld-environment-scanner
-description: Performs an initial scan of the Alfworld environment to identify all visible objects and receptacles. Processes raw observation text into a structured list of entities to build a mental map for planning.
+description: Performs an initial scan of the ALFWorld environment to identify all visible objects and receptacles. Use when you first enter an environment and need to build a mental map for task planning. Processes raw observation text into a structured list of entities, categorizing them as objects or receptacles.
 ---
 # Instructions
 

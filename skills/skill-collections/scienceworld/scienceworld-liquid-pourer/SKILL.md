@@ -1,27 +1,39 @@
 ---
 name: scienceworld-liquid-pourer
-description: This skill transfers the contents of a source liquid container into a target container for mixing or preparation. It should be triggered when combining multiple substances, such as paints or chemicals, into a single vessel.
+description: Transfers the contents of a source liquid container into a target container for mixing or preparation. Use this skill when you need to combine multiple substances (such as paints or chemicals) into a single vessel, or when a liquid must be moved from one container to another before processing.
 ---
-# Instructions for Liquid Pouring
+# Skill: Liquid Pourer
 
-This skill orchestrates the transfer of a liquid from a source container to a target container, typically as a preparatory step for mixing or chemical combination.
+## Purpose
+Transfer a liquid from a source container to a target container, typically as a preparatory step for mixing or chemical combination.
 
-## Core Action
-The primary action is `pour OBJ into OBJ`. Use this to transfer the contents.
+## When to Use
+- Combining multiple liquids or substances into one vessel for mixing.
+- Moving a liquid to a more suitable container before heating or processing.
+- Preparing ingredients for a recipe that requires pouring.
 
-## Execution Flow
-1.  **Identify Containers:** Locate the source container (holding the liquid to be transferred) and the target container (the destination vessel).
-2.  **Perform Transfer:** Execute the `pour` action with the correct object identifiers.
-3.  **Verify (Optional):** If necessary, examine the target container to confirm the transfer was successful.
+## Core Workflow
+1. **Identify Containers:** Use `look around` to locate the source container (with the liquid) and the target container (destination vessel).
+2. **Perform Transfer:** `pour OBJ into OBJ` with precise object identifiers.
+3. **Verify:** `look at OBJ` on the target container to confirm the transfer succeeded.
 
-## Key Considerations
-*   Ensure the target container is empty or can receive the new substance without adverse reaction (e.g., contamination).
-*   The skill is often used in sequence with other skills, such as `mix`, to achieve a final compound.
-*   Object identifiers (e.g., `wood cup (containing red paint)`) must be precise. Use `look around` and `examine` actions to confirm object states and contents if unsure.
+## Key Actions
+| Action | Purpose |
+|--------|---------|
+| `look around` | Locate source and target containers |
+| `pour OBJ into OBJ` | Transfer liquid contents |
+| `look at OBJ` | Verify transfer success |
+| `mix OBJ` | Combine contents (separate skill, used after pouring) |
 
-## Example Usage
-*   **Goal:** Create orange paint by mixing red and yellow.
-*   **Procedure:**
-    1.  `pour wood cup (containing red paint) into jug`
-    2.  `pour wood cup (containing yellow paint) into jug`
-    3.  `mix jug` (This is a separate mixing skill, not part of the pour operation).
+## Example
+**Task:** Create orange paint by mixing red and yellow paint.
+
+1. `look around` — find `wood cup (containing red paint)`, `wood cup (containing yellow paint)`, and `jug`
+2. `pour wood cup (containing red paint) into jug`
+3. `pour wood cup (containing yellow paint) into jug`
+4. `mix jug` — produces orange paint
+
+## Important Notes
+* Object identifiers must be precise (e.g., `wood cup (containing red paint)`). Use `look around` or `examine` to confirm exact names.
+* Ensure the target container can receive the substance without contamination.
+* Pouring only transfers contents — use `mix` as a separate step to combine them.

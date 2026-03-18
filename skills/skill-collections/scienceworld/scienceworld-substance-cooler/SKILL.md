@@ -1,6 +1,6 @@
 ---
 name: scienceworld-substance-cooler
-description: This skill initiates the cooling of a substance by moving it into a cooling appliance like a freezer. It should be triggered when a task requires lowering the temperature of a specific material to observe phase changes. The skill takes the substance (often in a container) and the target appliance as inputs, using the 'move OBJ to OBJ' action. It outputs confirmation of the new location.
+description: This skill initiates the cooling of a substance by moving it into a cooling appliance like a freezer. Use when a task requires lowering the temperature of a specific material to observe phase changes. The skill takes the substance (often in a container) and the target appliance as inputs, using the 'move OBJ to OBJ' action. It outputs confirmation of the new location.
 ---
 # Skill: Substance Cooler
 

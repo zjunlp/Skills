@@ -1,6 +1,11 @@
 ---
 name: webshop-product-evaluator
-description: This skill evaluates product listings against user requirements, such as price limits and feature matches, to identify viable options. It should be triggered when presented with a search results page containing multiple products. The skill analyzes product titles, prices, and brief descriptions to select the most promising candidate for detailed inspection.
+description: >-
+  Evaluates product listings against user requirements such as price limits and feature
+  matches to identify viable options. Use when you are on a search results page containing
+  multiple products and need to select the most promising candidate for detailed inspection.
+  The skill analyzes product titles, prices, and brief descriptions to rank and choose
+  the best match.
 ---
 # Instructions
 
@@ -22,3 +27,18 @@ Activate this skill when you are on a **search results page** in a web shopping 
 
 ## Thought Process Format
 Always structure your internal reasoning and final action using this format:
+
+**Thought:** [Summarize the user's constraints, evaluate each product against them, and justify your selection.]
+**Action:** `click[<product_id>]`
+
+## Example
+
+**Instruction:** "i need a teeth whitening toothpaste that also freshens breath, and price lower than 15.00 dollars"
+
+**Observation (Search Results Page):**
+- B09NYFDNVX: "Whitening Toothpaste with Breath Freshener" — $12.99
+- B08KZPTL3M: "Professional Teeth Whitening Kit" — $24.99
+- B07HQRJ4WP: "Mint Fresh Whitening Toothpaste" — $9.49
+
+**Thought:** The user needs a teeth whitening toothpaste that freshens breath, under $15. Product B09NYFDNVX at $12.99 mentions both "whitening" and "breath freshener" in the title — meets all criteria. B08KZPTL3M exceeds the budget at $24.99. B07HQRJ4WP is within budget and mentions "whitening" but does not explicitly mention breath freshening. Selecting B09NYFDNVX as the best match.
+**Action:** `click[B09NYFDNVX]`

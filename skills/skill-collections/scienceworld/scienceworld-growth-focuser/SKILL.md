@@ -1,6 +1,6 @@
 ---
 name: scienceworld-growth-focuser
-description: This skill applies a 'focus on' action to a specific plant or biological entity to signal intent and monitor its development. It should be triggered after planting or when the agent needs to track the growth stage of a plant (e.g., to observe sprouting, flowering, or reproduction). The skill outputs a confirmation of focus, which may be necessary for triggering or tracking life cycle progression in the environment.
+description: Use when you have planted a seed or need to track a plant's growth stage (sprouting, flowering, reproduction). Applies the 'focus on' action to a specific plant or biological entity to signal intent and monitor its development. Trigger after planting or when you need to observe life cycle progression in the ScienceWorld environment.
 ---
 # Skill: Growth Focuser
 
@@ -24,6 +24,18 @@ Use this skill when:
 *   **Disambiguation:** If multiple identical objects exist, the environment may prompt you to choose. Always specify the container (e.g., `in flower pot 1`) to avoid this.
 *   **Prerequisites:** The `focus on` action typically follows preparatory steps like `teleport to <location>`, `pick up <item>`, and `move <seed> to <pot>`.
 *   **Patience is Required:** Growth is not instantaneous. The `focus on` action signals intent, but you must follow it with `wait` actions to observe results.
+
+## Example
+
+**Scenario:** You need to grow an avocado plant from seed to maturity.
+
+1. You have already moved `avocado seed` into `flower pot 1` which contains soil and water.
+2. Run `focus on avocado seed in flower pot 1` — output: "You focus on the avocado seed."
+3. Run `wait` — the environment processes one time step.
+4. Run `focus on avocado seed in flower pot 1` again — output may now show: "avocado sprout" indicating growth progression.
+5. Continue alternating `focus on` and `wait` until the plant reaches the desired life stage (sprout, mature plant, flowering, reproduction).
+
+**Note:** Always include the `in <CONTAINER>` clause when multiple pots or seeds exist to avoid disambiguation prompts.
 
 ## Quick Reference
 **Trigger Condition:** Seed/Plant is in a growth-ready state.

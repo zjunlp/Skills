@@ -1,6 +1,10 @@
 ---
 name: webshop-product-selector
-description: Selects the most promising product candidate from a filtered shortlist for detailed inspection. Use this skill when multiple items seem viable; it makes a final selection based on a heuristic (e.g., best feature match, lowest price) and triggers the action to navigate to that product's detail page (click[product_id]).
+description: >-
+  Selects the most promising product candidate from a filtered shortlist for detailed
+  inspection. Use when you are on a search results page with multiple viable items and need
+  to make a final selection based on a heuristic such as best feature match or lowest price.
+  Triggers navigation to the selected product's detail page via click[product_id].
 ---
 # Instructions
 Use this skill when you are on a search results page with multiple product options that appear to meet the user's core requirements.
@@ -15,3 +19,18 @@ Use this skill when you are on a search results page with multiple product optio
 
 ## Thought Process Template
 Structure your reasoning before acting using this template:
+
+**Thought:** [List the user's requirements, evaluate each candidate product against them, explain why the selected product is the best match.]
+**Action:** `click[<product_id>]`
+
+## Example
+
+**Instruction:** "i need a portable double horn bluetooth speaker that is easy to carry, and price lower than 50.00 dollars"
+
+**Observation (Search Results):**
+- B093C1THVP: "Portable Double Horn Bluetooth Speaker — Compact & Easy to Carry" — $32.99
+- B08XYZ1234: "Double Horn Wireless Speaker — Premium Sound" — $55.00
+- B07ABC5678: "Mini Portable Bluetooth Speaker" — $19.99
+
+**Thought:** The user needs a portable, double horn bluetooth speaker that is easy to carry, under $50. B093C1THVP at $32.99 matches "portable", "double horn", and "easy to carry" — all keywords present in the title. B08XYZ1234 exceeds the $50 budget. B07ABC5678 is within budget but lacks "double horn". Selecting B093C1THVP as the best match.
+**Action:** `click[B093C1THVP]`

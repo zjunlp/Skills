@@ -1,28 +1,36 @@
 ---
 name: alfworld-clean-object
-description: This skill cleans a specified object using an appropriate cleaning receptacle (e.g., sink). It should be triggered when a task requires an object to be in a clean state (e.g., 'clean potato') before proceeding. The skill involves navigating to the cleaning location and performing the clean action, outputting confirmation that the object is now clean.
+description: Cleans a specified object using an appropriate cleaning receptacle (e.g., sinkbasin). Use when a task requires an object to be in a clean state (e.g., "clean potato", "wash apple") before proceeding. Navigates to the cleaning location, performs the clean action, and confirms the object is now clean.
 ---
 # Instructions
 
-## When to Use
-Use this skill when your task requires an object to be in a "clean" state before proceeding (e.g., "clean potato", "wash apple"). The skill is specifically designed for the ALFWorld environment.
+Clean an object you are holding using a sinkbasin. The object must be in your inventory before cleaning.
 
-## Prerequisites
-1. You must already possess the target object in your inventory.
-2. You must have identified an appropriate cleaning receptacle (typically a sinkbasin).
-
-## Core Procedure
-1. **Navigate to Cleaning Location**: Go to the identified cleaning receptacle (e.g., `sinkbasin 1`).
-2. **Execute Clean Action**: Perform the `clean` action using the format: `clean {object_name} with {receptacle_name}`.
-3. **Confirm Success**: Verify the environment's observation confirms the object has been cleaned.
+## Workflow
+1. **Navigate:** `go to sinkbasin 1` (or the appropriate sinkbasin in the environment)
+2. **Clean:** `clean {object} with sinkbasin 1` -- verify observation confirms "You clean the {object}"
+3. **Proceed:** The object is now clean. Continue with the next task step
 
 ## Action Format
-- Use the exact ALFWorld action: `clean {obj} with {recep}`
-- Example: `clean potato 1 with sinkbasin 1`
+- `clean {obj} with {recep}` (e.g., `clean potato 1 with sinkbasin 1`)
 
-## Error Handling
-- If the action fails (e.g., "Nothing happened"), consult the troubleshooting guide in the references.
-- Ensure you are at the correct receptacle and the object is in your inventory before attempting to clean.
+## Error Recovery
+- "Nothing happened": Check (1) you are holding the object, (2) you are at the sinkbasin, (3) object and receptacle names are correct
+- Not at sinkbasin: execute `go to sinkbasin 1` first
+
+## Example
+
+**Scenario:** You are holding `potato 1` and need to clean it.
+
+```
+Thought: I need to clean this potato. I should go to the sinkbasin.
+Action: go to sinkbasin 1
+Observation: On the sinkbasin 1, you see nothing.
+Action: clean potato 1 with sinkbasin 1
+Observation: You clean the potato 1 using the sinkbasin 1.
+```
+
+**Result:** The potato is now in a clean state and ready for the next task step.
 
 ## Post-Condition
-After successful execution, the object will be in a clean state. You may proceed with the next step of your task (e.g., placing the clean object in a microwave).
+After successful execution, the object will be in a clean state. You may proceed with the next step of your task (e.g., placing the clean object on a shelf or in a microwave).

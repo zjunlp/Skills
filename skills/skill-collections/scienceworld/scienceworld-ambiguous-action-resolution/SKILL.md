@@ -1,28 +1,67 @@
 ---
 name: scienceworld-ambiguous-action-resolution
-description: Resolves system ambiguity prompts by selecting the appropriate action from numbered options. Trigger this skill when the environment presents multiple identical action possibilities and requires explicit selection. This ensures task progression when the system cannot automatically disambiguate identical object instances.
+description: Use when the ScienceWorld environment returns an "Ambiguous request" prompt with a numbered list of identical action options. This skill resolves the disambiguation by selecting the lowest available number (typically 0) to proceed, ensuring task progression when multiple identical object instances exist and the system cannot automatically determine which instance to act upon.
 ---
-# Skill: Ambiguous Action Resolution
+# Skill: scienceworld-ambiguous-action-resolution
+
+## Purpose
+
+Resolve system disambiguation prompts that block task progression when the ScienceWorld environment cannot determine which identical object instance the agent intends to act upon. This is a mechanical bypass, not a decision-making step.
 
 ## When to Use
-Activate this skill **only** when the environment returns an "Ambiguous request" observation with a numbered list of identical action options. This typically occurs when multiple identical object instances exist (e.g., five identical banana seeds in a jar) and the system cannot determine which specific instance you intend to act upon.
 
-## Core Procedure
-1.  **Identify the Ambiguity:** Recognize the prompt format: `"Ambiguous request: Please enter the number for the action you intended (or blank to cancel):"` followed by a numbered list (0, 1, 2...).
-2.  **Parse the Options:** Quickly scan the listed options. They will be functionally identical but refer to different instances of the same object.
-3.  **Select a Number:** Choose the **lowest available number** (typically `0`) to proceed. The specific instance is irrelevant for task completion; any valid selection will satisfy the system's requirement and allow the action to execute.
-4.  **Execute:** Output the selected number as the next action (e.g., `Action: 0`).
+- When the environment returns an observation containing `"Ambiguous request: Please enter the number for the action you intended (or blank to cancel):"` followed by a numbered list
+- When multiple identical object instances exist (e.g., five identical banana seeds in a jar) and the system requires explicit selection
+- Only when options are functionally identical -- do NOT use this skill for menu selections where options have different meanings
+
+## Workflow
+
+1. **Recognize the prompt** -- Identify the exact phrase: `"Ambiguous request: Please enter the number for the action you intended (or blank to cancel):"`.
+2. **Scan the options** -- Confirm that the listed options (0, 1, 2...) are functionally identical, referring to different instances of the same object.
+3. **Select the lowest number** -- Choose `0` (the first option) to proceed. Any valid selection will produce the same result.
+4. **Execute** -- Output the selected number as the next action.
+
+## Examples
+
+### Example 1: Moving one of several identical banana seeds
+
+**Observation:**
+```
+Ambiguous request: Please enter the number for the action you intended (or blank to cancel):
+0: move banana seed (in seed jar, in inventory, in agent, in greenhouse) to flower pot 1 (in greenhouse)
+1: move banana seed (in seed jar, in inventory, in agent, in greenhouse) to flower pot 1 (in greenhouse)
+2: move banana seed (in seed jar, in inventory, in agent, in greenhouse) to flower pot 1 (in greenhouse)
+```
+
+**Action:**
+```
+> 0
+```
+
+The system proceeds with moving one banana seed to flower pot 1.
+
+### Example 2: Picking up one of several identical items
+
+**Observation:**
+```
+Ambiguous request: Please enter the number for the action you intended (or blank to cancel):
+0: pick up red wire (on table, in workshop)
+1: pick up red wire (on table, in workshop)
+```
+
+**Action:**
+```
+> 0
+```
 
 ## Key Principles
-*   **Efficiency:** Do not overthink. The objects are identical; any choice is valid.
-*   **Consistency:** Always default to the first option (`0`) unless a previous step in the task logic specifically requires targeting a different instance (which is rare).
-*   **Focus:** This skill is a **disambiguation mechanic**, not a decision-making process. Its sole purpose is to bypass a system prompt blocking progress.
 
-## Example from Trajectory
-**Observation:** "Ambiguous request: Please enter the number for the action you intended (or blank to cancel): 0: move banana seed (in seed jar, in inventory, in agent, in greenhouse) to flower pot 1 (in greenhouse) 1: move banana seed (in seed jar, in inventory, in agent, in greenhouse) to flower pot 1 (in greenhouse) ..."
-**Correct Skill Application:** `Action: 0`
+- **Efficiency** -- Do not overthink; the objects are identical and any choice is valid.
+- **Consistency** -- Always default to `0` unless task logic specifically requires a different instance.
+- **Scope** -- This skill is strictly a disambiguation mechanic, not a decision-making process.
 
-## Anti-Patterns to Avoid
-*   Do NOT use this skill for non-ambiguous choices or menu selections where options have different meanings.
-*   Do NOT trigger this skill if the observation does not contain the exact "Ambiguous request" phrase.
-*   Do NOT waste steps analyzing the differences between identical instances.
+## Anti-Patterns
+
+- Do NOT use for non-ambiguous choices where options have different meanings.
+- Do NOT trigger if the observation does not contain the exact "Ambiguous request" phrase.
+- Do NOT waste steps analyzing differences between identical instances.

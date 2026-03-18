@@ -1,6 +1,6 @@
 ---
 name: scienceworld-circuit-builder
-description: This skill constructs a simple electrical circuit by connecting components like batteries, wires, and light bulbs. It should be triggered when the agent needs to test electrical conductivity or create a functional circuit for an experiment. The input is a set of available components, and the output is a fully connected circuit ready for activation.
+description: This skill constructs a simple electrical circuit by connecting components like batteries, wires, and light bulbs. Use when the agent needs to test electrical conductivity or create a functional circuit for an experiment. The input is a set of available components, and the output is a fully connected circuit ready for activation.
 ---
 # Instructions
 
@@ -42,3 +42,16 @@ Follow these steps to construct the series circuit. Use the exact `connect` acti
 *   **Circuit Logic:** This builds a simple series circuit: Battery -> Wire1 -> Light Bulb -> Wire3 -> Target Object -> Wire2 -> Battery.
 *   **Action Precision:** Use the exact object names and connection points (anode, cathode, terminal 1/2) as observed in the environment.
 *   **Error Handling:** If a component is missing, examine the room (`look around`) to identify available substitutes before proceeding.
+
+## 6. Example
+**Task:** Test whether a metal pot is electrically conductive.
+1. `teleport to workshop`
+2. `pick up metal pot`
+3. `connect battery anode to orange wire terminal 1`
+4. `connect battery cathode to yellow wire terminal 1`
+5. `connect orange wire terminal 2 to blue light bulb cathode`
+6. `connect green wire terminal 2 to anode in blue light bulb`
+7. `connect metal pot terminal 1 to yellow wire terminal 2`
+8. `connect metal pot terminal 2 to green wire terminal 1`
+9. `wait1` — observe if the light bulb turns on
+10. Light bulb is on → `move metal pot to blue box` (conductive)

@@ -1,6 +1,6 @@
 ---
 name: scienceworld-substance-fetcher
-description: This skill locates and retrieves a target substance or material from a container in the environment. It should be triggered when the core task involves processing a specific substance (e.g., chocolate, a chemical). The skill finds the substance, often inside a fridge or cupboard, and acquires it via a pick-up or move action.
+description: Locates and retrieves a target substance or material from a container in the environment. Use this skill when the task requires processing a specific substance (e.g., chocolate, sodium chloride, a chemical) and you need to find and acquire it. Searches rooms and containers (fridge, cupboard, counter) and retrieves the substance via pick up or move actions.
 ---
 # Skill: Substance Fetcher
 

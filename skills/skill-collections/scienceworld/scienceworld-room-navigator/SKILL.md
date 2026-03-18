@@ -1,6 +1,6 @@
 ---
 name: scienceworld-room-navigator
-description: Teleports the agent to a specified room within the ScienceWorld environment. It should be triggered when the agent needs to move between different locations to locate objects or access specific facilities. The input is a target room name, and the output is the agent arriving at that room, ready for further interaction.
+description: Teleports the agent to a specified room within the ScienceWorld environment. Use when the agent needs to move between different locations to locate objects or access specific facilities. The input is a target room name, and the output is the agent arriving at that room, ready for further interaction.
 ---
 # Instructions
 
@@ -20,3 +20,9 @@ Use this skill to instantly move the agent to a different room. This is the prim
 *   Teleportation is a single-step action. There is no need for intermediate movement.
 *   All standard room connections (doors) remain, but teleportation bypasses them.
 *   After teleporting, the agent's inventory and any held items remain unchanged.
+
+## Example
+**Task:** Move to the kitchen to find a metal pot.
+1. `teleport to kitchen`
+2. Observation: "You teleport to the kitchen."
+3. `look around` to survey the room and locate the metal pot.

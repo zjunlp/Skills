@@ -1,36 +1,43 @@
 ---
 name: alfworld-object-transporter
-description: This skill picks up a target object from its current receptacle and moves it to a specified destination receptacle. It should be triggered when the agent has located an object and needs to relocate it to complete a task (e.g., moving a laptop to a desk). The skill requires the object identifier and source location as input, and it outputs the action sequence to take and transport the object.
+description: Picks up a target object from its current receptacle and moves it to a specified destination receptacle. Use when you have located an object and need to relocate it to complete a task (e.g., moving a laptop to a desk). Takes the object identifier, source receptacle, and destination receptacle as inputs and outputs the action sequence to take, transport, and place the object.
 ---
 # Instructions
 
-## When to Use
-Use this skill when you have:
-1. **Identified the target object** (e.g., `laptop 1`) and its **current source receptacle** (e.g., `bed 2`).
-2. **Identified the destination receptacle** (e.g., `desk 1`).
-3. The goal requires moving the object to the destination to complete a task.
+Pick up an object from its current location and transport it to a destination receptacle.
 
-## Input Requirements
-You must provide the following information to execute this skill:
-- **`target_object`**: The identifier of the object to move (e.g., `laptop 1`).
-- **`source_receptacle`**: The identifier of the receptacle where the object is currently located (e.g., `bed 2`).
-- **`destination_receptacle`**: The identifier of the receptacle where the object must be placed (e.g., `desk 1`).
-
-## Execution Flow
-1. **Navigate to Source**: Go to the `source_receptacle`.
-2. **Pick Up Object**: Take the `target_object` from the `source_receptacle`.
-3. **Navigate to Destination**: Go to the `destination_receptacle`.
-4. **Place Object**: Put the `target_object` in/on the `destination_receptacle`.
+## Workflow
+1. **Navigate to source:** `go to {source_receptacle}` -- verify observation shows the target object
+2. **Pick up:** `take {object} from {source_receptacle}` -- verify "You pick up" confirmation
+3. **Navigate to destination:** `go to {destination_receptacle}`
+4. **Place:** `put {object} in/on {destination_receptacle}` -- verify "You put" confirmation
 
 ## Action Format
-All actions must follow the Alfworld environment's strict format:
 - `go to {receptacle}`
 - `take {object} from {receptacle}`
 - `put {object} in/on {receptacle}`
 
-## Error Handling
-- If an action fails (environment returns "Nothing happened"), consult the troubleshooting guide in `references/troubleshooting.md`.
-- If the object or receptacle is not found, re-scan the environment before retrying.
+## Error Recovery
+- "Nothing happened" on take: verify you are at the correct receptacle and the object name matches the observation
+- "Nothing happened" on put: verify you are holding the object and at the correct destination
+- Object not visible: re-scan the environment to locate it before retrying
+
+## Example
+
+**Scenario:** Move `laptop 1` from `bed 2` to `desk 1`.
+
+```
+Action: go to bed 2
+Observation: On the bed 2, you see a laptop 1, a pillow 1.
+Action: take laptop 1 from bed 2
+Observation: You pick up the laptop 1 from the bed 2.
+Action: go to desk 1
+Observation: On the desk 1, you see a pen 2.
+Action: put laptop 1 in/on desk 1
+Observation: You put the laptop 1 in/on the desk 1.
+```
+
+**Result:** The laptop has been transported from the bed to the desk.
 
 ## Bundled Resources
 - **Script**: `scripts/transport_sequence.py` provides a deterministic sequence generator.

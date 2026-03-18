@@ -1,25 +1,40 @@
 ---
 name: scienceworld-living-entity-identifier
-description: Analyzes room observations to identify potential living things (e.g., eggs, plants, animals) among listed objects. Processes observation text, flags candidate living items based on domain knowledge, and outputs a focused target for subsequent actions.
+description: Analyzes room observations to identify potential living things (e.g., eggs, plants, animals) among listed objects. Use this skill when a task involves finding, focusing on, or interacting with a living thing, biological entity, or organism. Processes observation text, flags candidate living items based on domain knowledge, and outputs a focused target for subsequent actions like focus on or pick up.
 ---
 # Skill: Living Entity Identifier
 
 ## Purpose
-Use this skill when the task involves finding, focusing on, or interacting with a "living thing," "biological entity," "organism," or similar target. The skill analyzes the textual observation of a room to identify candidate objects that are likely to be living or contain life (e.g., eggs, plants, animals).
+Identify living things (eggs, plants, animals) from room observations and focus on them for task progression.
 
-## Core Logic
-1.  **Trigger:** The task description mentions a living entity.
-2.  **Analyze:** Parse the current room's observation text.
-3.  **Identify:** Flag objects from a known list of living entity indicators (see `references/living_indicators.md`).
-4.  **Output:** Select the most suitable candidate and formulate the next action (typically `focus on [TARGET]` or `examine [TARGET]`).
+## Core Workflow
+1. **Survey Room:** `look around` to get the observation text listing all objects.
+2. **Identify Candidates:** Scan the object list for living entity indicators:
+   - **Animals:** dove, giant tortoise, bee, frog, fish
+   - **Eggs:** dove egg, chicken egg, turtle egg
+   - **Plants:** flower, tree, moss, fern, algae
+   - **Other biological:** mushroom, seed, pollen
+3. **Focus on Target:** `focus on [IDENTIFIED_OBJECT]` to signal task progress.
+4. **Transport (if needed):** `pick up [OBJECT]` then `move [OBJECT] to [CONTAINER]`.
 
-## Primary Workflow
-1.  **Look Around:** First, use `look around` to get the room's observation text.
-2.  **Run Analysis:** Process the observation using the logic in `scripts/analyze_observation.py`.
-3.  **Execute Focus:** If a candidate is found, perform `focus on [IDENTIFIED_OBJECT]`.
-4.  **Handle Inventory/Transport:** If the task requires moving the entity, proceed with `pick up` and `move` actions to the specified destination.
+## Key Actions
+| Action | Purpose |
+|--------|---------|
+| `look around` | Survey room for objects |
+| `teleport to LOC` | Move to rooms with biological likelihood |
+| `focus on OBJ` | Signal identification to task system |
+| `pick up OBJ` | Acquire entity for transport |
 
-## Key Rules
-*   Prioritize explicit living things (e.g., "dove egg," "giant tortoise") over ambiguous substances (e.g., "air," "water").
-*   If the initial room lacks candidates, teleport to rooms with higher biological likelihood (e.g., `outside`, `greenhouse`, `bedroom`).
-*   The `focus on` action is critical for signaling task progress. Use it immediately after identification.
+## Example
+**Task:** "Find a living thing in the environment."
+
+1. `teleport to outside`
+2. `look around` — observation lists: "a dove egg", "a rock", "soil"
+3. Identify "dove egg" as the living entity candidate
+4. `focus on dove egg`
+5. If transport required: `pick up dove egg` then `move dove egg to blue box`
+
+## Important Notes
+* Prioritize explicit living things (e.g., "dove egg," "giant tortoise") over ambiguous substances (e.g., "air," "water").
+* If the current room lacks candidates, `teleport to` rooms with higher biological likelihood: `outside`, `greenhouse`, `bedroom`.
+* Always use `focus on` immediately after identification — it signals task progress.

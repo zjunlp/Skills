@@ -1,6 +1,6 @@
 ---
 name: scienceworld-item-fetcher
-description: This skill picks up a specified object from the environment and moves it into the agent's inventory. It should be triggered when the agent identifies a required tool or material (e.g., thermometer, metal pot) that needs to be collected for later use. The skill takes an object name as input and confirms the item's transfer to inventory, facilitating object manipulation across locations.
+description: Picks up a specified object from the environment and moves it into the agent's inventory. Use this skill when you identify a required tool or material (e.g., thermometer, metal pot) that needs to be collected for later use in an experiment or task. Takes an object name as input and confirms the item's transfer to inventory.
 ---
 # Skill: Fetch and Inventory Item
 

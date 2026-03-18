@@ -1,6 +1,6 @@
 ---
 name: alfworld-search-verifier
-description: This skill re-examines previously visited locations to confirm the absence of a target object or to check for overlooked items. It should be triggered when an initial search fails to find enough objects or when double-checking is required for task completion. The skill systematically revisits receptacles, ensuring no viable location is missed before concluding the search.
+description: Re-examines previously visited locations to confirm the absence of a target object or to check for overlooked items. Use when an initial search fails to find enough objects or when double-checking is required before concluding task failure. Systematically revisits receptacles, re-opens closed containers, and re-inspects contents to ensure no viable location was missed.
 ---
 # Instructions
 
@@ -25,6 +25,21 @@ description: This skill re-examines previously visited locations to confirm the 
 4.  **Conclusion:** After revisiting all locations on your list:
     *   **If the target object was found:** Integrate it into your main task plan.
     *   **If the target object was not found:** You can conclusively report that the object is not available in the searched area and adjust your task strategy accordingly (e.g., consider task failure or exploring a new, unsearched area).
+
+## Example
+
+**Scenario:** You need two cellphones but only found one. Revisiting previously searched locations.
+
+```
+Thought: I only found 1 cellphone but need 2. Let me revisit sidetable 1 which I checked earlier.
+Action: go to sidetable 1
+Observation: On the sidetable 1, you see a cellphone 2, a keychain 1.
+Thought: Found cellphone 2! I must have overlooked it during the initial search.
+Action: take cellphone 2 from sidetable 1
+Observation: You pick up the cellphone 2 from the sidetable 1.
+```
+
+**Result:** The second cellphone was found by re-examining a previously visited location.
 
 ## Thought Process Template
 When executing this skill, structure your reasoning as follows:

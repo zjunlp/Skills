@@ -1,6 +1,6 @@
 ---
 name: scienceworld-circuit-connector
-description: This skill connects two electrical components (e.g., wires, batteries, devices) by their terminals to build or modify a circuit. It should be triggered when constructing electrical setups for testing, such as conductivity checks or device activation. The input includes two component identifiers and their connection points, and the output is an established electrical connection.
+description: This skill connects two electrical components (e.g., wires, batteries, devices) by their terminals to build or modify a circuit. Use when constructing electrical setups for testing, such as conductivity checks or device activation. The input includes two component identifiers and their connection points, and the output is an established electrical connection.
 ---
 # Instructions
 

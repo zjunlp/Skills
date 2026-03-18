@@ -1,31 +1,42 @@
 ---
 name: alfworld-object-heater
-description: This skill heats a specified object using an available heating appliance (e.g., microwave, stove). Activate this skill when the agent has an object that requires heating and the appliance is prepared. It requires the object and appliance as inputs and results in the object being heated.
+description: Heats a specified object using an available heating appliance (e.g., microwave, stoveburner). Use when you are holding an object that requires heating and need to navigate to and operate the heating appliance. Takes the object and appliance as inputs and results in the object being in a heated state.
 ---
-# Skill: Heat Object
+# Instructions
 
-## Purpose
-Use this skill to heat a specified object (e.g., potato, soup) using a compatible heating appliance (e.g., microwave, stove) in the ALFWorld environment. The skill handles the sequence of navigation, preparation, and operation of the appliance.
+Heat an object you are holding using a compatible heating appliance (microwave or stoveburner).
 
 ## Prerequisites
-1. **Object in Inventory:** The target object must be in the agent's possession (e.g., recently taken from a receptacle).
-2. **Appliance Available:** A compatible heating appliance (microwave, stoveburner) must be present and accessible in the environment.
-3. **Appliance State:** The appliance must be in a state ready for heating (e.g., microwave door open, stove burner available).
+- The target object must be in your inventory
+- A heating appliance (microwave, stoveburner) must exist in the environment
 
-## Core Workflow
-Follow this high-level sequence. For detailed, error-prone steps (like checking appliance state), use the bundled script.
+## Workflow
+1. **Navigate:** `go to {appliance}` (e.g., `go to microwave 1`)
+2. **Check state:** If observation says appliance is closed, execute `open {appliance}` -- verify observation confirms it is now open
+3. **Heat:** `heat {object} with {appliance}` -- verify observation confirms "You heat the {object}"
+4. **(Optional) Place:** If the task requires it, navigate to the destination and place the heated object
 
-1.  **Navigate** to the target heating appliance.
-2.  **Prepare** the appliance (e.g., open the microwave door).
-3.  **Execute** the heating action on the object using the appliance.
-4.  **(Optional) Navigate** to a target location (e.g., dining table) to place the heated object.
+## Action Format
+- `go to microwave 1` / `go to stoveburner 1`
+- `open microwave 1`
+- `heat {object} with {appliance}` (e.g., `heat potato 1 with microwave 1`)
 
-## Key Decision Points
-*   **Appliance Selection:** Choose the most appropriate appliance based on the object and context (e.g., use a microwave for quick heating, a stove for cooking).
-*   **Error Recovery:** If an action fails ("Nothing happened"), re-evaluate the appliance's state (is it open? is it free?) or your inventory (do you have the object?).
-*   **Post-Heating Action:** Decide if the heated object should be placed elsewhere (e.g., on a dining table) as part of the task.
+## Error Recovery
+- "Nothing happened" on heat: Check (1) you are holding the object, (2) appliance is open, (3) appliance name is correct
+- Appliance occupied: Take the existing item out first, then retry
 
-## Important Notes
-*   The `heat` action requires the object to be in your inventory and the appliance to be ready.
-*   Always verify the observation after each action to confirm success before proceeding.
-*   Refer to the bundled reference for a detailed breakdown of the example trajectory and common pitfalls.
+## Example
+
+**Scenario:** You are holding `potato 1` and need to heat it.
+
+```
+Thought: I need to heat the potato. I'll go to the microwave.
+Action: go to microwave 1
+Observation: The microwave 1 is closed.
+Action: open microwave 1
+Observation: You open the microwave 1. The microwave 1 is open. In it, you see nothing.
+Action: heat potato 1 with microwave 1
+Observation: You heat the potato 1 using the microwave 1.
+```
+
+**Result:** The potato is now heated. Proceed to place it at the destination if required by the task.

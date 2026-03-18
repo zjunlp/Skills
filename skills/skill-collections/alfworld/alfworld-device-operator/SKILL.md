@@ -1,6 +1,6 @@
 ---
 name: alfworld-device-operator
-description: This skill operates a device or appliance (like a desklamp) to interact with another object. It should be triggered when the task requires using a tool on a target item (e.g., 'look at laptop under the desklamp'). The skill assumes the target object and the operating device are co-located, and it executes the appropriate use action (e.g., toggle, heat, clean).
+description: Operates a device or appliance (like a desklamp, microwave, or fridge) to interact with another object. Use when the task requires using a tool on a target item (e.g., "look at laptop under the desklamp", "heat potato with microwave"). Locates both the device and target object, co-locates them, and executes the appropriate use action (toggle, heat, cool, or clean).
 ---
 # Instructions
 
@@ -42,3 +42,24 @@ Follow this sequence when the skill is triggered:
 *   **Co-location Required:** The skill assumes the final action requires the target object and the operating device to be in the same location (on the same receptacle).
 *   **Device First:** Prioritize finding the device before extensively searching for the target object, as the device's location is often a fixed landmark.
 *   **Invalid Actions:** If the environment responds with "Nothing happened," re-evaluate your object/device names and your location. Ensure you are using the correct action verb for the device type.
+
+## Example
+
+**Scenario:** Task is "look at laptop under the desklamp."
+
+```
+Thought: I need to find the desklamp first. It's likely on a sidetable or desk.
+Action: go to sidetable 1
+Observation: On the sidetable 1, you see a desklamp 1.
+Thought: Found the desklamp. Now I need to find the laptop.
+Action: go to desk 1
+Observation: On the desk 1, you see a laptop 1, a pen 2.
+Action: take laptop 1 from desk 1
+Observation: You pick up the laptop 1 from the desk 1.
+Action: go to sidetable 1
+Observation: On the sidetable 1, you see a desklamp 1.
+Action: use desklamp 1
+Observation: You turn on the desklamp 1.
+```
+
+**Result:** The laptop is now being examined under the desklamp, completing the task.

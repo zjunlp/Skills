@@ -1,6 +1,6 @@
 ---
 name: scienceworld-object-focuser
-description: This skill selects and focuses on a specific object to signal task intent or prepare it for manipulation. It is triggered after identifying a target object that meets task criteria (e.g., a living thing). The skill uses the 'focus on OBJ' action, taking the object name as input, which is often required before performing actions like moving or using the object in scienceWorld tasks.
+description: This skill selects and focuses on a specific object to signal task intent or prepare it for manipulation. Use when you have identified a target object that meets task criteria (e.g., a living thing) and need to formally select it before performing actions like moving or using the object in ScienceWorld tasks. The skill uses the 'focus on OBJ' action, taking the object name as input.
 ---
 # Skill: Object Focuser
 
@@ -23,4 +23,8 @@ Use this skill to formally select a target object in the ScienceWorld environmen
 *   **Timing:** Focus is typically performed *after* exploration/identification and *before* the main manipulation action.
 *   **Task Logic:** This action is a procedural formality within ScienceWorld. It does not change the object's state but informs the task tracker of your selected target.
 
-For detailed examples and common patterns, see the reference documentation.
+## Example
+**Task:** Focus on a dove egg before picking it up for a biology task.
+1. `look around` — observe: "a dove egg on the table"
+2. `focus on dove egg`
+3. Confirmation received → proceed with `pick up dove egg`.

@@ -1,6 +1,6 @@
 ---
 name: webshop-initial-search
-description: Performs the first search on an e-commerce platform using keywords derived from parsed user requirements. Trigger this skill when starting product discovery or when previous search results are insufficient. It formulates a search query from the criteria (e.g., '24 pack of 7.5 ounce bottles of non-gmo classic tonic') and executes the search action, returning the initial result page.
+description: Performs the first search on an e-commerce platform using keywords derived from parsed user requirements. Use when starting product discovery from a user instruction or when previous search results are insufficient and a new query is needed. It formulates a search query from the criteria (e.g., '24 pack of 7.5 ounce bottles of non-gmo classic tonic') and executes the search[] action, returning the initial result page.
 ---
 # Instructions
 1.  **Parse Requirements:** Extract the core product criteria from the user's instruction. Focus on:
@@ -17,3 +17,13 @@ description: Performs the first search on an e-commerce platform using keywords 
     *   The action output will be the initial search results page observation.
 
 4.  **Next Steps:** After executing this skill, proceed to evaluate the search results. The next actions will typically involve clicking on a promising product listing or refining the search.
+
+## Example
+
+**User instruction:** "I would like to find a 24 pack of 7.5 ounce bottles of non-gmo classic tonic, and target price lower than 50.00 dollars"
+
+**Thought:** I need to search for the product using the key attributes. I will omit the price constraint from the search keywords.
+
+**Action:** `search[24 pack of 7.5 ounce bottles of non-gmo classic tonic]`
+
+**Observation:** The platform returns the initial search results page with matching product listings.

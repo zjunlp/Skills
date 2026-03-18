@@ -1,6 +1,6 @@
 ---
 name: alfworld-storage-explorer
-description: This skill systematically explores storage receptacles (like drawers or cabinets) to find an appropriate placement location for an object. It should be triggered when the agent needs to store an item but the exact storage location is unknown or must be validated. The skill involves opening, inspecting, and closing receptacles to assess their suitability.
+description: Systematically explores storage receptacles (drawers, cabinets, shelves) to find an appropriate placement location for an object. Use when the agent needs to store an item but the exact target receptacle is unknown or ambiguous. Opens, inspects, and closes candidate receptacles to assess suitability, then places the object in the best match.
 ---
 # Skill: Storage Explorer
 
@@ -50,6 +50,19 @@ For each candidate receptacle:
 - If "Nothing happened" when trying to open/close, the receptacle might be locked or broken
 - If unable to place object in a receptacle, try alternative locations
 - If all exploration fails, reconsider your understanding of "appropriate" storage
+
+## Example
+
+**Task:** "Put a clean sponge in drawer."
+
+**Input:** Holding `sponge 1` (already cleaned). Target type: drawer.
+
+**Sequence:**
+1. `go to drawer 1` → Observation: "You are at drawer 1."
+2. `open drawer 1` → Observation: "You open the drawer 1. The drawer 1 is open. You see nothing."
+3. `put sponge 1 in/on drawer 1` → Observation: "You put the sponge 1 in/on the drawer 1."
+
+**Output:** The sponge 1 has been stored in drawer 1. Task complete.
 
 ## Output Format
 Maintain the standard action format:

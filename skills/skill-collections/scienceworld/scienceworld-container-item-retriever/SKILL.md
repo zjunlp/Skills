@@ -27,4 +27,8 @@ Execute the `pick up <ITEM>` action, where `<ITEM>` is the exact name of the tar
 *   **Ambiguity:** If multiple identical items exist (e.g., "avocado seed, avocado seed, avocado seed"), the `pick up` action will typically retrieve one. The skill does not handle selecting a specific instance.
 *   **Post-condition:** After successful execution, the item is in the agent's inventory and can be used in subsequent steps.
 
-For detailed examples and edge cases, see the reference documentation.
+## Example
+**Task:** Retrieve an avocado seed from a jar for planting.
+1. `look around` — observe: "a jar (containing an avocado seed)"
+2. `pick up avocado seed`
+3. Expected observation: "You move the avocado seed to the inventory."

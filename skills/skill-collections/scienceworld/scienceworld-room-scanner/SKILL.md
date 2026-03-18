@@ -1,6 +1,6 @@
 ---
 name: scienceworld-room-scanner
-description: This skill performs a 'look around' action to scan and describe the current room's contents, including visible objects, containers, and doors. It should be triggered upon entering a new room or when the agent needs to locate specific items or assess the environment state. The skill outputs a detailed room description, which is essential for inventory discovery and situational awareness.
+description: This skill performs a 'look around' action to scan and describe the current room's contents, including visible objects, containers, and doors. Use when entering a new room or when the agent needs to locate specific items or assess the environment state. The skill outputs a detailed room description, which is essential for inventory discovery and situational awareness.
 ---
 # Skill: Room Scanner
 
@@ -31,3 +31,9 @@ The observation from `look around` will contain:
 *   This is a low-level, atomic skill. It should often be the first action in a sequence.
 *   The observation it generates is critical context for subsequent decision-making. Refer back to it.
 *   Do not overuse it. Once you have a recent description of a room, rely on that knowledge until you have reason to believe the state has changed.
+
+## Example
+**Task:** Survey the workshop after teleporting there.
+1. `look around`
+2. Observation: "This room is called the workshop. In it, you see: a table. On the table is: a battery, a blue light bulb, an orange wire, a yellow wire, a green wire. You also see: a blue box, an orange box. There is a door to the hallway."
+3. Parse: available components include battery, light bulb, three wires; classification containers are blue box and orange box.

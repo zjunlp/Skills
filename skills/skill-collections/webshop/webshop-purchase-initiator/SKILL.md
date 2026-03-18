@@ -1,6 +1,11 @@
 ---
 name: webshop-purchase-initiator
-description: This skill initiates the purchase process by clicking the buy button once a product and its options have been selected and verified against requirements. It should be triggered when all selection criteria are satisfied and the user is ready to proceed to checkout. The skill confirms the final price meets any budget constraints before executing the purchase action.
+description: >-
+  Initiates the purchase process by clicking the buy button once a product and its options
+  have been selected and verified against requirements. Use when you are on a product detail
+  page, all selection criteria (price, features, options) are satisfied, and the user is
+  ready to proceed to checkout. Confirms the final price meets budget constraints before
+  executing click[buy now].
 ---
 # Instructions
 
@@ -22,8 +27,14 @@ Before clicking "Buy Now", you **must** perform these checks:
 
 If any check fails, do not use this skill. Instead, revert to selecting the correct option or searching for a different product.
 
-## Trajectory Example
-Refer to `references/trajectory_example.md` for a detailed walkthrough of a successful skill execution.
+## Example
+
+**Instruction:** "i need a teeth whitening toothpaste that also freshens breath, and price lower than 15.00 dollars"
+
+**Observation:** Product page for "Whitening Toothpaste with Breath Freshener" — Price: $12.99, Size: 4oz (selected), Flavor: Mint (selected). Available actions: click[buy now], click[back to search].
+
+**Thought:** The user needs a teeth whitening toothpaste that freshens breath, under $15. The current product is priced at $12.99 (< $15.00), matches "whitening" and "breath freshener" in the title, and all required options (size, flavor) are selected. All checks pass — proceeding to purchase.
+**Action:** `click[buy now]`
 
 ## Error Handling
 - If the "Buy Now" button is not present in the list of clickable actions, the action will be invalid. Do not force the action.

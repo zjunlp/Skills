@@ -1,31 +1,40 @@
 ---
 name: alfworld-object-state-modifier
-description: This skill uses an appliance to change the state of an object (e.g., cooling, heating, cleaning). It should be triggered when the task requires altering an object's temperature or cleanliness using a specific device (like cooling with a fridge or heating with a microwave). The skill requires the object, the target state, and the appliance as inputs, and executes the corresponding modifier action (e.g., 'cool X with Y').
+description: Uses an appliance to change the state of an object (cooling, heating, or cleaning). Use when the task requires altering an object's temperature or cleanliness using a specific device (e.g., cooling with a fridge, heating with a microwave, cleaning with a sinkbasin). Takes the object, target state, and appliance as inputs and executes the corresponding modifier action.
 ---
 # Instructions
 
-## When to Use
-Use this skill when the task requires you to **change the state of an object** using a specific household appliance. The primary actions are:
-- **Cool** an object (e.g., with a fridge).
-- **Heat** an object (e.g., with a microwave or stove).
-- **Clean** an object (e.g., with a sink).
+Change an object's state (cool, heat, or clean) using a household appliance. You must be holding the target object before executing the state change.
 
-## Core Procedure
-1.  **Locate & Acquire Object:** First, navigate to and pick up the target object.
-2.  **Navigate to Appliance:** Go to the appliance required for the state change (e.g., `fridge 1`, `microwave 1`).
-3.  **Prepare Appliance (if needed):** Some appliances require preparation (e.g., opening a fridge or microwave door). Perform the necessary `open` or `toggle` action.
-4.  **Execute State Change:** Perform the core modifier action: `cool {obj} with {appliance}`, `heat {obj} with {appliance}`, or `clean {obj} with {appliance}`.
-5.  **Complete Task:** After the state is changed, proceed with the next task step (e.g., placing the object elsewhere).
+## Workflow
+1. **Navigate to appliance:** `go to {appliance}` (e.g., `go to fridge 1`)
+2. **Prepare if closed:** If observation says appliance is closed, execute `open {appliance}` -- verify it opens
+3. **Execute state change:** `{action} {obj} with {appliance}` -- verify observation confirms the change
+4. **Proceed:** Continue with the next task step (e.g., placing the modified object)
 
-## Key Considerations
-- **Invalid Actions:** If the environment responds with "Nothing happened," your action was invalid. Consult the `references/appliance_interaction_guide.md` for troubleshooting.
-- **Appliance State:** Always check if an appliance is open/closed/on/off before attempting the modifier action.
-- **Object Holding:** You must be holding the target object (`{obj}`) before executing the state change action.
+## Action Mapping
+| State Change | Action | Typical Appliance |
+|---|---|---|
+| Cool | `cool {obj} with {appliance}` | `fridge 1` |
+| Heat | `heat {obj} with {appliance}` | `microwave 1`, `stoveburner 1` |
+| Clean | `clean {obj} with {appliance}` | `sinkbasin 1` |
 
-## Inputs Required
-- `{obj}`: The specific object identifier (e.g., `tomato 1`).
-- `{target_state}`: The desired state change (`cool`, `heat`, or `clean`).
-- `{appliance}`: The specific appliance identifier (e.g., `fridge 1`).
+## Error Recovery
+- "Nothing happened": Check (1) you are holding the object, (2) appliance is open/ready, (3) object and appliance names are correct
+- Appliance occupied: remove existing items first with `take {item} from {appliance}`
 
-## Output Action
-The skill's final output is a single, formatted action string: `{target_state} {obj} with {appliance}`.
+## Example
+
+**Scenario:** You need to cool a tomato using the fridge.
+
+```
+Thought: I'm holding tomato 1 and need to cool it. I'll go to the fridge.
+Action: go to fridge 1
+Observation: The fridge 1 is closed.
+Action: open fridge 1
+Observation: You open the fridge 1. The fridge 1 is open. In it, you see a lettuce 1.
+Action: cool tomato 1 with fridge 1
+Observation: You cool the tomato 1 using the fridge 1.
+```
+
+**Result:** The tomato is now in a cooled state. Proceed with the next task step (e.g., placing it on a countertop).

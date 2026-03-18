@@ -1,34 +1,64 @@
 ---
 name: alfworld-object-storer
-description: This skill places an object into a selected storage receptacle after confirming its suitability. It should be triggered when the agent has identified an appropriate storage location and is ready to complete the storage task. The skill takes the object and target receptacle as inputs and results in the object being stored.
+description: Use when the agent is holding an object and needs to place it into a target receptacle in ALFWorld. This skill checks receptacle suitability, opens closed containers if needed, and executes the `put` command to store the object. It handles both open surfaces (countertops, beds) and closed containers (drawers, cabinets).
 ---
 # Skill: Object Storer
 
-## Purpose
-This skill orchestrates the final step of storing a clean object into a designated receptacle within a household environment. It is triggered after the agent has:
-1. Located the target object.
-2. Cleaned the object if required.
-3. Identified and validated a suitable storage location.
+## When to Use
+Trigger this skill when:
+1. The agent is holding the target object (optionally cleaned/heated/cooled as required)
+2. A suitable storage receptacle has been identified
+3. The agent needs to execute the final placement step
 
-## Core Logic
-The skill performs a final suitability check and executes the storage action. The core decision is:
-- **If the receptacle is open and empty (or appropriately designated)**, proceed with storage.
-- **If the receptacle is closed**, open it first, then store the object.
-- **If the receptacle is unsuitable** (e.g., already contains unrelated items), the agent should abort this skill and search for an alternative location.
+## Core Workflow
 
-## Inputs & Execution
-- **Primary Inputs:** `{object_name}`, `{target_receptacle}`
-- **Prerequisite State:** The agent must be holding the clean `{object_name}` and be at the location of the `{target_receptacle}`.
-- **Action:** Execute the `put {object_name} in/on {target_receptacle}` command.
+### 1. Validate Prerequisites
+- Confirm the agent is holding `{object_name}` (check inventory)
+- Confirm the agent is at the location of `{target_receptacle}`
+- If not at the receptacle, navigate there first: `go to {target_receptacle}`
 
-## Example from Trajectory
-**Scenario:** Storing a clean knife.
-1. **Trigger Condition:** Agent is holding `knife 1` (cleaned) and has determined `drawer 1` is a suitable, empty storage location.
-2. **Skill Execution:**
-   - Agent is at `drawer 1`.
-   - Observation: `On the drawer 1, you see nothing.`
-   - **Action:** `put knife 1 in/on drawer 1`
+### 2. Check Receptacle State
+Evaluate the receptacle before placing:
+
+| Receptacle State | Action |
+|-----------------|--------|
+| Open and empty/suitable | Proceed with `put` |
+| Closed (drawer, cabinet, safe) | `open {target_receptacle}` first, then `put` |
+| Unsuitable (wrong type, full) | Abort and search for alternative receptacle |
+
+### 3. Execute Storage
+- Run: `put {object_name} in/on {target_receptacle}`
+- Check the observation for confirmation
+
+### 4. Verify Placement
+- A successful placement updates the receptacle contents in the observation
+- If the observation confirms the object is now in/on the receptacle, storage is complete
+
+## Example
+
+**Task:** "Clean the knife and put it in a drawer."
+
+```
+> go to drawer 1
+The drawer 1 is closed.
+> open drawer 1
+You open the drawer 1. The drawer 1 is open. In it, you see nothing.
+> put knife 1 in/on drawer 1
+You put the knife 1 in/on the drawer 1.
+```
+
+**Result:** `knife 1` is now stored in `drawer 1`. Task complete.
+
+**Example 2 — Open surface:**
+
+```
+> go to bed 1
+On the bed 1, you see a pillow 1.
+> put cellphone 2 in/on bed 1
+You put the cellphone 2 in/on the bed 1.
+```
 
 ## Error Handling
-- If the environment responds with "Nothing happened," the action was invalid. Consult the `receptacle_suitability_guide.md` reference and restart the search process.
-- Do not use this skill if the receptacle contains items that conflict with the object's storage norms (e.g., putting a knife in a drawer full of spoons).
+- **"Nothing happened"**: The agent may not be holding the object, or the receptacle name is incorrect. Verify with `inventory` and re-check the receptacle identifier.
+- **Receptacle unsuitable**: If the receptacle is not appropriate for the object, search for an alternative using the object-locator skill.
+- **Agent not at receptacle**: Navigate to the receptacle with `go to {target_receptacle}` before attempting `put`.

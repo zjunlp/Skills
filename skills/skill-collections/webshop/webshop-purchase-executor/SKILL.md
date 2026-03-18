@@ -1,6 +1,6 @@
 ---
 name: webshop-purchase-executor
-description: This skill executes the purchase action for a confirmed suitable product on an e-commerce page. It is triggered after product verification when the user decision is to buy. The skill clicks the purchase button (e.g., 'Buy Now') to complete the transaction.
+description: Executes the purchase action for a confirmed suitable product on an e-commerce page. Use when a product has been verified against the user's requirements (price, attributes) and the decision is to buy. Performs a click[Buy Now] action on the purchase button to complete the transaction.
 ---
 # Skill: webshop-purchase-executor
 
@@ -28,3 +28,13 @@ Perform a `click` action on the purchase button.
 - Do not use this skill for browsing, searching, or product comparison.
 - The skill assumes price and specification validation occurred in a previous step.
 - If multiple purchase options exist (e.g., "Buy Now", "Add to Cart & Checkout"), prefer the most direct path to complete the transaction, typically "Buy Now".
+
+## Example
+
+**Scenario:** The user wants a natural-looking wig priced under $40.00. You are on a product detail page for "Natural Looking Human Hair Wig - $34.99" and have verified it meets all criteria.
+
+**Thought:** The product matches the user's requirements (natural looking, price $34.99 < $40.00). I should proceed with the purchase.
+
+**Action:** `click[Buy Now]`
+
+**Observation:** The purchase is confirmed and the transaction is complete.

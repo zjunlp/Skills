@@ -1,6 +1,6 @@
 ---
 name: scienceworld-object-locator
-description: This skill searches for a specific target object across multiple rooms by systematically teleporting to likely locations and examining each room. It should be triggered when the agent needs to find an object whose exact location is unknown. The skill involves iterating through candidate rooms, using room exploration to check for the object, and continues until the target is found, providing the object's location as output.
+description: Searches for a specific target object across multiple rooms by systematically teleporting to likely locations and examining each room. Use this skill when you need to find an object whose exact location is unknown. Iterates through candidate rooms using teleport and look around, checks for the object, and continues until found, returning the object's location.
 ---
 # Instructions
 
@@ -27,6 +27,15 @@ Locate a specific target object within the ScienceWorld environment when its loc
 - `look around`
 - `examine <OBJECT>` (if more detail is needed to confirm identity)
 - `pick up <OBJECT>` (if the goal is to acquire the object, not just locate it)
+
+## Example
+**Task:** Find the thermometer in the environment.
+
+1. `teleport to kitchen`
+2. `look around` — no thermometer found
+3. `teleport to workshop`
+4. `look around` — observation includes "a thermometer, currently reading a temperature of 10 degrees celsius"
+5. Thermometer located in workshop. `pick up thermometer` if needed.
 
 ## Notes & Best Practices
 - **Efficiency:** Always `look around` immediately after teleporting to get the full room state.

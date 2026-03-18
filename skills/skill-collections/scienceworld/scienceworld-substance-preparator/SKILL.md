@@ -1,6 +1,6 @@
 ---
 name: scienceworld-substance-preparator
-description: This skill transfers a target substance into an appropriate container for processing (e.g., a pot for heating, a beaker for mixing). It should be triggered after acquiring the substance and before setting up an apparatus. The skill selects a suitable empty container and moves the substance into it.
+description: Use when you need to transfer a target substance into an appropriate container for processing (e.g., a pot for heating, a beaker for mixing). Trigger after acquiring the substance and before setting up an apparatus. Selects a suitable empty container and moves the substance into it.
 ---
 # Substance Preparation Skill
 
@@ -28,9 +28,15 @@ Prepare a target substance for subsequent processing (e.g., heating, mixing) by 
 *   **Substance Integrity:** If the substance is temperature-sensitive (e.g., chocolate in a fridge), moving it to a room-temperature container is part of preparation.
 *   **Error Handling:** If the transfer fails (e.g., container not found), `look around` again and consult the bundled reference for common container names.
 
-## Example from Trajectory
-> **Substance:** `chocolate` (found in fridge).
-> **Action:** `move chocolate to metal pot` (metal pot was empty in cupboard).
-> **Verification:** Subsequent `look at stove` showed "metal pot (containing chocolate)".
+## Example
+
+**Scenario:** You need to melt chocolate as part of a heating task.
+
+1. You have already located `chocolate` in the `fridge` in the kitchen.
+2. Run `look around` to scan for containers. You see: `metal pot` (empty, on counter), `glass beaker` (empty, on shelf), `ceramic cup` (contains water).
+3. Select `metal pot` as the best option (metal, empty, suitable for heating).
+4. Run `examine metal pot` to confirm it is empty.
+5. Run `move chocolate to metal pot`.
+6. Run `examine metal pot` — output confirms: "metal pot (containing chocolate)".
 
 **Proceed to the next skill (e.g., apparatus setup) only after this verification.**

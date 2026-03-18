@@ -1,6 +1,6 @@
 ---
 name: alfworld-receptacle-finder
-description: This skill searches for a suitable empty or appropriately occupied receptacle (like a shelf) to place an object. It should be triggered when the agent needs to store or place an object and must evaluate available receptacles. The skill examines candidate receptacles and identifies one meeting the placement criteria.
+description: Searches for a suitable empty or appropriately occupied receptacle (like a shelf or table) to place an object. Use when you are holding an object that needs to be stored or placed and must find a receptacle that meets the placement criteria. Examines candidate receptacles by navigating to and inspecting each one until a suitable location is found.
 ---
 # Instructions
 
@@ -20,5 +20,22 @@ description: This skill searches for a suitable empty or appropriately occupied 
 *   **Observation Parsing:** Carefully read the observation after each `go to` action. The line "On the {recep}, you see..." lists its contents. "you see nothing." indicates it is empty.
 *   **Invalid Actions:** If an action fails ("Nothing happened"), re-evaluate your target and try a different receptacle or confirm the object is in your inventory.
 
-## Example Trajectory (from `references/example_trajectory.md`)
-For a detailed example of this skill in action, including handling object pre-cleaning and sequential shelf evaluation, refer to the bundled reference.
+## Example
+
+**Scenario:** You are holding `soapbar 1` (clean) and need to find an empty shelf to place it.
+
+```
+Thought: I need to find an empty shelf for the soapbar. I'll check shelf 1 first.
+Action: go to shelf 1
+Observation: On the shelf 1, you see a tissuebox 1.
+Thought: Shelf 1 has items. Let me try shelf 2.
+Action: go to shelf 2
+Observation: On the shelf 2, you see nothing.
+Action: put soapbar 1 in/on shelf 2
+Observation: You put the soapbar 1 in/on the shelf 2.
+```
+
+**Result:** Found an empty shelf and placed the soapbar on it.
+
+## Bundled Reference
+For a detailed example including handling object pre-cleaning and sequential shelf evaluation, refer to `references/example_trajectory.md`.

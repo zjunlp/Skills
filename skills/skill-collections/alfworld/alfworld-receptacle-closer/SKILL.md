@@ -1,6 +1,6 @@
 ---
 name: alfworld-receptacle-closer
-description: Closes an open receptacle to maintain environment tidiness after inspection. Trigger this after you have finished searching a container and no longer need it open. It helps prevent clutter and is often used as a cleanup step following object searching inside drawers or similar containers.
+description: Closes an open receptacle to maintain environment tidiness after inspection. Use when you have finished searching a container (drawer, cabinet, fridge) and no longer need it open. Takes a receptacle identifier as input and outputs confirmation that the receptacle is closed, preventing clutter during multi-step search tasks.
 ---
 # Skill: Receptacle Closer
 

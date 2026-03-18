@@ -1,6 +1,6 @@
 ---
 name: alfworld-locate-target-object
-description: This skill navigates to a suspected location and identifies a target object. It should be triggered when the agent's goal requires finding a specific object (e.g., 'potato', 'plate') and its location is not immediately known. The skill involves moving to a relevant receptacle (like a fridge or cabinet) and checking its contents, outputting the object's location or confirming its absence.
+description: Navigates to a suspected location and identifies a target object. Use when your goal requires finding a specific object (e.g., "potato", "plate") and its location is not immediately known. Moves to a relevant receptacle (like a fridge or cabinet), checks its contents, and outputs the object's location or confirms its absence.
 ---
 # Skill: Locate Target Object
 
@@ -35,6 +35,20 @@ Follow this sequence of actions and reasoning.
 *   **Contextual Guessing:** Use common sense to guess the initial search location (e.g., `fridge` for perishables, `cabinet` for dry goods).
 *   **Sequential Access:** You must `go to` a location before you can `open` it.
 *   **Visual Confirmation:** Only trust the `Observation` after opening a receptacle to confirm an object's presence or absence.
+
+## Example
+
+**Scenario:** You need to find a potato for a heating task.
+
+```
+Thought: I need to find a potato. Potatoes are commonly stored in the fridge.
+Action: go to fridge 1
+Observation: The fridge 1 is closed.
+Action: open fridge 1
+Observation: You open the fridge 1. The fridge 1 is open. In it, you see a potato 1, a lettuce 2.
+```
+
+**Result:** The potato has been located in `fridge 1`. You can now `take potato 1 from fridge 1` and proceed.
 
 ## Next Steps
 After successfully locating the object, you will typically need to `take` it or interact with it, which is outside the scope of this skill. If the object is not found, trigger this skill again with a new suspected location.

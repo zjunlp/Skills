@@ -1,11 +1,8 @@
 ---
 name: scienceworld-container-inspector
-description: This skill performs a 'look at' action to inspect the contents of a specific container or device. It should be triggered when the agent needs to verify what is inside a container (e.g., checking if lead is in the blast furnace) or monitor the state of contents (e.g., solid vs. liquid). The skill outputs a detailed list of contents and their states, providing essential feedback for process monitoring.
+description: Inspects the contents of a container or device using the 'look at' action. Use this skill when you need to verify what is inside a container (e.g., checking if lead is in the blast furnace), monitor the state of contents (e.g., solid vs. liquid phase changes), or confirm that a placement or process step succeeded. Returns a detailed list of contents and their states for process monitoring.
 ---
 # Skill: Container/Device Inspector
-
-## Purpose
-Execute a `look at` action on a specified container or device to retrieve a detailed observation of its contents and their states. This is a critical monitoring skill for verifying process steps, such as confirming an item is present inside a furnace or checking the phase (solid/liquid) of a substance.
 
 ## When to Use
 Trigger this skill when you need to:
@@ -48,5 +45,3 @@ This skill is often used in a sequence:
 -   If the container door is closed, you must `open` it before using this skill.
 -   The skill only inspects; it does not manipulate contents. Use `pick up`, `move`, or `use` for manipulation.
 
----
-*For detailed examples of container interactions and state transitions, see the reference documentation.*

@@ -1,19 +1,23 @@
 ---
 name: scienceworld-conditional-focus-executor
-description: Executes a 'focus' action on a specific object based on the outcome of a prior conditional evaluation. It should be triggered when task instructions specify focusing on different objects (e.g., different colored boxes) depending on a measurement result. The skill takes the conditional outcome as input and performs the corresponding focus action.
+description: Executes a 'focus on OBJ' action on a specific object based on the outcome of a prior conditional evaluation. Use when you have a measurement result and task instructions specify focusing on different objects (e.g., colored boxes) depending on whether the result meets a threshold.
 ---
 # Conditional Focus Executor
 
-## Purpose
-This skill automates the final step in a conditional measurement task within the ScienceWorld environment. After obtaining a measurement result (e.g., a temperature reading), you must focus on a specific object (e.g., a colored box) based on whether the result meets a defined threshold.
-
 ## When to Use
-Use this skill **only** when:
-1. You have completed a measurement (e.g., temperature, pH, mass).
-2. The task instructions explicitly state a conditional rule (e.g., "If result > X, focus on A; if result < X, focus on B").
-3. You have already determined the conditional outcome (True/False or the specific branch).
+Use after completing a measurement (temperature, pH, mass) when the task specifies a conditional rule like "If result > X, focus on A; otherwise, focus on B."
 
-## Input Required
-Before executing, you **must** have determined the correct conditional branch. The skill requires this as a clear decision.
+## Procedure
+1. **Evaluate the condition** against your measurement result.
+2. **Determine the target object** based on which branch is true.
+3. **Execute:** `focus on <TARGET_OBJECT>`
+4. **Verify:** Confirm the focus action succeeded before proceeding.
 
-**Required Input Format:**
+If the focus action fails (e.g., object not found), use `look around` to verify the target object name matches exactly.
+
+## Example
+**Task:** "If the temperature of the substance is above 50C, focus on the red box. Otherwise, focus on the blue box."
+1. Measurement result: 63C
+2. Evaluation: 63 > 50 is true → target is red box
+3. Execute: `focus on red box`
+4. Observation: "You focus on the red box." → task complete.

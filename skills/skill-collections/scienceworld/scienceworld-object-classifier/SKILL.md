@@ -1,6 +1,6 @@
 ---
 name: scienceworld-object-classifier
-description: Moves a tested or examined object into a designated container (e.g., a specific colored box) based on a determined property. Trigger this skill after completing a test or inspection to fulfill a classification or sorting subtask. It takes the object and target container as inputs and performs the move action.
+description: Moves a tested or examined object into a designated container (e.g., a specific colored box) based on a determined property. Use when you have completed a test or inspection and need to fulfill a classification or sorting subtask. It takes the object and target container as inputs and performs the move action.
 ---
 # Instructions
 
@@ -26,3 +26,9 @@ Execute the `move` command to transfer the object into the correct container.
 *   This skill is for the **final sorting action only**. Do not use it to perform the initial test or inspection.
 *   Ensure the object is not in your inventory. If it is, drop it first (`drop <OBJECT>`).
 *   The skill assumes the classification logic (e.g., interpreting a circuit test) has already been handled by a prior process.
+
+## Example
+**Task:** Sort a metal pot after a conductivity test determined it is conductive.
+1. `look around` — confirm metal pot and yellow box are in the room.
+2. `move metal pot to yellow box`
+3. `look at yellow box` — verify: "containing a metal pot".

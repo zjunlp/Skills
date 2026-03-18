@@ -1,37 +1,37 @@
 ---
 name: scienceworld-inventory-manager
-description: This skill handles picking up objects from the environment into the agent's inventory or moving them out. It should be triggered when the agent needs to acquire an object for later use or place an object into a container. The input is an object name and location, and the output is the object being transferred to or from inventory.
+description: Handles picking up objects from the environment into the agent's inventory or moving them out to containers. Use this skill when you need to acquire an object for later use (pick up) or place an object into a specific container as part of a task requirement (move). Takes an object name and location as input and confirms the transfer to or from inventory.
 ---
-# Instructions
+# Skill: Inventory Manager
 
 ## Purpose
-Use this skill to manage the agent's inventory by picking up objects from the environment or placing them into containers. This is a foundational action for acquiring tools, materials, or evidence needed for tasks.
+Manage the agent's inventory: pick up objects from the environment or place them into containers.
 
-## When to Use
-- You need to acquire an object for later use in an experiment or task.
-- You need to place an object into a specific container (e.g., a box, a table, a room) as part of a task requirement.
-- The object's location is known or can be inferred from context.
+## Core Workflow
+1. **Locate Object:** Use `look around` to confirm the object is present and note its exact name.
+2. **Acquire:** `pick up OBJ` to move the object into your inventory.
+3. **Place (if needed):** `move OBJ to OBJ` to transfer the object to a container.
+4. **Verify:** Check the observation feedback to confirm the action succeeded. If it fails, verify exact object names with `look around`.
 
-## Core Action Pattern
-The primary action is `pick up OBJ` to acquire an object or `move OBJ to OBJ` to place it into a container. The exact syntax may vary slightly based on the environment's action space (e.g., `pick up metal pot containing nothing in kitchen` vs. `move metal pot to blue box`).
+## Key Actions
+| Action | Purpose |
+|--------|---------|
+| `look around` | Find objects and confirm names |
+| `pick up OBJ` | Move object to inventory |
+| `move OBJ to OBJ` | Place object into a container |
 
-## Procedure
-1.  **Locate the Object:** Ensure you are in the correct room or that the object is in your immediate vicinity. Use `look around` or `examine` if needed.
-2.  **Acquire the Object:** If the object is not in your inventory, use the `pick up` action with the correct object identifier and location.
-3.  **Place the Object (if required):** If the task requires placing the object into a container, use the `move` action with the target container's name.
+## Examples
 
-## Key Considerations
-- **Object State:** Some objects may be described as "containing nothing." Include this in the action if the environment's grammar requires it (e.g., `pick up metal pot containing nothing in kitchen`).
-- **Container Targets:** When moving an object to a container like a box, use the container's name and color if specified (e.g., `blue box`, `orange box`).
-- **Inventory Management:** You can only hold one item in your inventory at a time in the provided trajectory. Plan your actions accordingly.
+**Acquiring an object:**
+1. `look around` — see "a metal pot containing nothing" in the kitchen
+2. `pick up metal pot containing nothing in kitchen`
+3. Result: "You move the metal pot to the inventory."
 
-## Example from Trajectory
-**Goal:** Acquire the metal pot from the kitchen.
-- Action: `pick up metal pot containing nothing in kitchen`
-- Result: "You move the metal pot to the inventory."
+**Placing an object:**
+1. `move metal pot to blue box`
+2. Result: Object transferred to the blue box.
 
-**Goal:** Place the conductive metal pot into the correct box.
-- Action: `move metal pot to blue box`
-- Result: The object is transferred from inventory (or the room) to the specified container.
-
-For complex object interactions or environment-specific grammar, consult the bundled reference.
+## Important Notes
+* Some objects include state descriptions in their name (e.g., "metal pot containing nothing"). Use the full name as shown in the environment.
+* Use container color and name as specified in the task (e.g., `blue box`, `orange box`).
+* Inventory capacity is limited — plan pick up and place actions to avoid conflicts.

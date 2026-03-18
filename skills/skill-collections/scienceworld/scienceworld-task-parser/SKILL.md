@@ -1,6 +1,6 @@
 ---
 name: scienceworld-task-parser
-description: Analyzes user instructions in ScienceWorld environments to extract specific task requirements and constraints. Use this skill when receiving a new task to identify required objects, target locations, and action sequences.
+description: Analyzes user instructions in ScienceWorld environments to extract specific task requirements and constraints. Use when receiving a new task to identify required objects, target locations, and action sequences before taking any environment actions.
 ---
 # Instructions for ScienceWorld Task Parsing
 
@@ -34,4 +34,11 @@ Immediately analyze the user's natural language instruction. Extract the followi
 *   **Clarity:** Structure your internal reasoning using the "Thought:" prefix before each action, as shown in the trajectory.
 *   **Verification:** If an initial `look around` is insufficient, a second `look around` is acceptable to confirm the environment state before proceeding.
 
-For detailed examples and common task patterns, consult the reference documentation.
+## Example
+**Task instruction:** "Find a non-living thing in the workshop and move it to the purple box."
+1. **Parse:** Target = non-living object, Location = workshop, Container = purple box.
+2. `teleport to workshop`
+3. `look around` — observe: "a battery, a blue light bulb, an orange wire..."
+4. Select: battery (non-living, portable).
+5. `focus on battery`
+6. `move battery to purple box`

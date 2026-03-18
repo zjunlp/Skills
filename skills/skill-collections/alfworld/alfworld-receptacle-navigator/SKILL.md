@@ -1,6 +1,6 @@
 ---
 name: alfworld-receptacle-navigator
-description: This skill plans and executes movement to a target receptacle within the environment. It should be triggered when the agent needs to interact with an object at a specific location (e.g., go to fridge to cool an item) or needs to access a receptacle itself (e.g., go to garbagecan to dispose of an item). The skill uses the receptacle name from the observation or task goal, outputs the 'go to' action, and confirms arrival at the destination.
+description: Plans and executes movement to a target receptacle within the ALFWorld environment. Use when the agent needs to reach a specific location before interacting with objects there (e.g., go to fridge to cool an item, go to garbagecan to dispose of an item). Takes a receptacle identifier as input, executes the `go to` action, and outputs confirmation of arrival at the destination.
 ---
 # Skill: Receptacle Navigator
 
@@ -22,6 +22,15 @@ Trigger this skill when the agent's plan requires:
 2.  Execute the `go to` action.
 3.  If the environment responds with "Nothing happened", the action was invalid. Consult the `references/common_receptacles.md` list and the latest observation to formulate a new `go to` target.
 4.  Upon successful navigation, proceed with the next skill in the plan (e.g., `alfworld-object-interactor`).
+
+## Example
+
+**Input:** `target_receptacle: fridge 1`
+
+**Sequence:**
+1. `go to fridge 1` → Observation: "You are at fridge 1. On the fridge 1, you see nothing."
+
+**Output:** Agent has arrived at fridge 1 and can now interact with it (open, take items, cool objects, etc.).
 
 ## Error Handling
 - **Invalid Target:** If "Nothing happened" is observed, the receptacle may be unreachable or incorrectly named. Re-analyze the scene description to find a valid path or alternative receptacle.

@@ -1,6 +1,6 @@
 ---
 name: scienceworld-process-pauser
-description: This skill introduces deliberate pauses in task execution. It should be triggered when the agent needs to consider next steps, evaluate intermediate results, or wait for processes to complete. The skill uses the 'wait1' or 'wait' actions to temporarily halt activity, preventing rushed decisions in complex experimental procedures.
+description: This skill introduces deliberate pauses in task execution. Use when the agent needs to consider next steps, evaluate intermediate results, or wait for processes to complete. The skill uses the 'wait1' or 'wait' actions to temporarily halt activity, preventing rushed decisions in complex experimental procedures.
 ---
 # Skill: Process Pauser
 

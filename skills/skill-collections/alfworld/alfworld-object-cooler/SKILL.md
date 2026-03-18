@@ -1,6 +1,6 @@
 ---
 name: alfworld-object-cooler
-description: This skill cools a held object using an appropriate cooling appliance, such as a fridge. It should be triggered when the task requires reducing the temperature of an object (e.g., a hot pot). The skill assumes the agent is holding the object and is near the cooling receptacle; it performs the 'cool' action to achieve the desired state change, preparing the object for subsequent steps like placement or serving.
+description: Cools a held object using an appropriate cooling appliance such as a fridge or freezer. Use when the task requires reducing the temperature of an object (e.g., "cool some pot", "chill the mug") and the agent is already holding the object. Performs the ALFWorld `cool` action and outputs the cooled object ready for subsequent placement or serving steps.
 ---
 # Skill: Cool Held Object
 
