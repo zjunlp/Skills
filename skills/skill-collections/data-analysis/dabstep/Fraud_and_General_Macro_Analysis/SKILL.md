@@ -1,6 +1,6 @@
 ---
 name: dabstep-fraud-general-macro-analysis
-description: Solve Fraud_and_General_Macro_Analysis questions in the dabstep payment processing dataset. Use this skill for macro-level transaction analysis questions: fraud rates, fraud comparisons by segment, percentage calculations, correlation analysis, most-frequent category lookups, and population-level statistics across merchants, countries, card schemes, and payment methods. Trigger whenever questions ask about fraud rates, fraudulent disputes, transaction counts by category, most/highest/lowest statistics, percentage of transactions, or correlation between payment attributes.
+description: 'Solve Fraud_and_General_Macro_Analysis questions in the dabstep payment processing dataset. Use this skill for macro-level transaction analysis questions: fraud rates, fraud comparisons by segment, percentage calculations, correlation analysis, most-frequent category lookups, and population-level statistics across merchants, countries, card schemes, and payment methods. Trigger whenever questions ask about fraud rates, fraudulent disputes, transaction counts by category, most/highest/lowest statistics, percentage of transactions, or correlation between payment attributes.'
 ---
 
 # Dabstep: Fraud & General Macro Analysis
