@@ -1,0 +1,11 @@
+{
+  "owner": "papersareflowing",
+  "slug": "citation-verifier",
+  "displayName": "Citation Verifier",
+  "latest": {
+    "version": "0.1.0",
+    "publishedAt": 1773257270221,
+    "commit": "https://github.com/openclaw/skills/commit/edc829422e2d7560dc8d0c2f587ce25a10d067ac"
+  },
+  "history": []
+}
